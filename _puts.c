@@ -24,7 +24,7 @@ int _puts(const char *str)
 		str++;
 	}
 
-	if (_putchar('\n') == EOF)
+	if (*str == EOF)
 		return (EOF);
 
 	count++;
