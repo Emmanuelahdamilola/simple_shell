@@ -23,7 +23,8 @@ int main(int argc, char **argv)
 		num_char = getline(&getline_ptr, &n, stdin);
 		if (num_char == -1)
 		{
-			_puts("<<<Can't be found>>>");
+			_puts("<<<Terminating shell>>>"); /*changed the words*/
+			_puts("\n"); /*added this*/
 			return (-1);
 		}
 		_puts(getline_ptr);
