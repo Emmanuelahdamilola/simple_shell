@@ -16,9 +16,9 @@ void read_execute_loop(void)
 		if (num_chars == EOF)
 		{
 			if (feof(stdin))
-				perror("Terminating shell");
+				/*perror*/_puts("Terminating shell\n");
 			else
-				perror("Error");
+				/*perror*/_puts("Error\n");
 			break;
 		}
 		parse_arguments(lineptr);
