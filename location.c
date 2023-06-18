@@ -20,11 +20,11 @@ char *location(char *command)
 
 		while (path_token != NULL)
 		{
-			file_path_len = strlen(path_token) + 1 + strlen(command) + 1;
+			file_path_len = _strlen(path_token) + 1 + _strlen(command) + 1;
 			file_path = malloc(file_path_len);
-			strcpy(file_path, path_token);
-			strcat(file_path, "/");
-			strcat(file_path, command);
+			_strcpy(file_path, path_token);
+			_strcat(file_path, "/");
+			_strcat(file_path, command);
 
 			if (access(file_path, X_OK) == 0)
 			{
