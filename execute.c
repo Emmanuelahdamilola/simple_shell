@@ -1,12 +1,12 @@
 #include "main.h"
 /**
- * execmd - execuute the command
+ * _execute - execuute the command
  * @argv: The array of command arguments
  * Description: This function executes the specified command by forking a child
  * process and calling execve to replacethe childprocess withthedesired command
  * Return: void
  */
-void execmd(char **argv)
+void _execute(char **argv)
 {
 	pid_t child_pid;
 	int status;
@@ -14,6 +14,8 @@ void execmd(char **argv)
 
 	if (argv)
 	{
+		if (_strcmp(argv[0], "exit") == 0)
+			exit(0);
 		command_path = location(argv[0]);
 		if (command_path == NULL)
 		{
@@ -41,6 +43,6 @@ void execmd(char **argv)
 			else if (WIFSIGNALED(status))
 				WTERMSIG(status);
 		}
-		/**free(command_path);*/
+		/*free(command_path);*/
 	}
 }

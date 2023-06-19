@@ -12,7 +12,7 @@
 
 int _puts(const char *str);
 int _putchar(char c);
-void execmd(char **argv);
+void _execute(char **argv);
 char *location(char *command);
 void read_execute_loop(void);
 void parse_arguments(char *line);
@@ -20,5 +20,7 @@ void free_argv(char **argv, int size);
 size_t _strlen(const char *s);
 char *_strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
-char *_strdup(const char* string);
+char *_strdup(const char *string);
+int _strcmp(const char *s1, const char *s2);
+
 #endif

@@ -1,7 +1,6 @@
 #include "main.h"
-
 /**
- * parse_arguments - Tokenize the input line and execute the command.
+ * parse_arguments - Tokenize(split) the input line and execute the command
  * @line: The input line to be parsed
  */
 void parse_arguments(char *line)
@@ -10,7 +9,7 @@ void parse_arguments(char *line)
 	const char *delim = " \n";
 	int i, count_tokens = 0;
 
-	lineptr_copy = strdup(line);
+	lineptr_copy = _strdup(line);
 	if (lineptr_copy == NULL)
 	{
 		perror("Memory allocation error");
@@ -33,18 +32,17 @@ void parse_arguments(char *line)
 	token = strtok(lineptr_copy, delim);
 	for (i = 0; token != NULL; i++)
 	{
-		argv[i] = strdup(token);
+		argv[i] = _strdup(token);
 		if (argv[i] == NULL)
 		{
-			perror("Memory allocation error");
-			free_argv(argv, i);
+			perror("Memory allocation error"); /*free_argv(argv, i);*/
 			free(lineptr_copy);
 			return;
 		}
 		token = strtok(NULL, delim);
 	}
 	argv[i] = NULL;
-	execmd(argv);
+	_execute(argv);
 	free_argv(argv, i);
 	free(lineptr_copy);
 }
