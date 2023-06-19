@@ -54,6 +54,5 @@ int main(int ac, char **argv)
 	(void)argv;
 
 	read_execute_loop();
-
 	return (0);
 }
