@@ -17,6 +17,6 @@ char *location(char *command);
 void read_execute_loop(void);
 void parse_arguments(char *line);
 void free_argv(char **argv, int size);
-
+char *string_dup(char *string);
 
 #endif
