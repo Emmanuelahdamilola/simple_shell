@@ -15,7 +15,7 @@ char *location(char *command)
 	path = getenv("PATH");
 	if (path != NULL)
 	{
-		path_copy = strdup(path);
+		path_copy = _strdup(path);
 		path_token = strtok(path_copy, ":");
 
 		while (path_token != NULL)
