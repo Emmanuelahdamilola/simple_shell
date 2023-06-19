@@ -16,9 +16,14 @@ void read_execute_loop(void)
 		if (num_chars == EOF)
 		{
 			if (feof(stdin))
-				/*perror*/_puts("Terminating shell\n");
+				/*perror*/
+				_puts("Terminating shell\n");
 			else
-				/*perror*/_puts("Error\n");
+			{
+				/*perror*/
+				_puts("Error\n");
+			}
+			free(lineptr);
 			break;
 		}
 		parse_arguments(lineptr);
@@ -54,5 +59,9 @@ int main(int ac, char **argv)
 	(void)argv;
 
 	read_execute_loop();
+	/**
+	 * if (argv == 'exit')
+		exit;
+		*/
 	return (0);
 }
