@@ -13,7 +13,7 @@ void read_execute_loop(void)
 	while (1)
 	{
 		_puts("$ ");
-		num_chars = getline(&lineptr, &n, stdin);
+		num_chars = _getline(&lineptr, &n, stdin);
 		if (num_chars == EOF)
 		{
 			if (feof(stdin))
