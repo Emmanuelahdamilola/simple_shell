@@ -65,15 +65,15 @@ void env(void)
 
 	while (*envptr != NULL)
 	{
-		len_str = _strlen(*envptr) + 1; /* give space for the null terminator*/
-		env_string = malloc(len_str);   /*allocate memory dynamically*/
+		len_str = _strlen(*envptr) + 1;
+		env_string = malloc(len_str);
 
 		if (env_string != NULL)
 		{
 			_strcpy(env_string, *envptr);
 			_strcat(env_string, "\n");
 			write(STDOUT_FILENO, env_string, len_str);
-			free(env_string); /*free the allocated memory*/
+			free(env_string);
 		}
 		envptr++;
 		env_count++;
