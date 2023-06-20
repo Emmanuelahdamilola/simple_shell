@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * read_execute_loop - Read input and execute commands in a loop
  * Return: void
@@ -53,15 +54,13 @@ void free_argv(char **argv, int size)
  * @argv: Arguments.
  * Return: 0, success.
  */
-int main(int ac, char **argv)
+int main(int argc, char **argv)
 {
-	(void)ac;
+
+	(void)argc;
 	(void)argv;
 
 	read_execute_loop();
-	/**
-	 * if (argv == 'exit')
-		exit;
-		*/
+
 	return (0);
 }
