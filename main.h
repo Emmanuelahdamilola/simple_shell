@@ -10,6 +10,8 @@
 #include <sys/wait.h>
 #include <errno.h>
 
+extern char **environ;
+
 int _puts(const char *str);
 int _putchar(char c);
 void _execute(char **argv);
@@ -22,5 +24,5 @@ char *_strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
 char *_strdup(const char *string);
 int _strcmp(const char *s1, const char *s2);
-
+void env(void);
 #endif
