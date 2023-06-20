@@ -15,7 +15,10 @@ void _execute(char **argv)
 	if (argv)
 	{
 		if (_strcmp(argv[0], "exit") == 0)
+		{
+			_puts("exiting shell...\n\n\n\n[exit]\n");
 			exit(0);
+		}
 		command_path = location(argv[0]);
 		if (command_path == NULL)
 		{
