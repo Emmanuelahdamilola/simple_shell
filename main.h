@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#define BUFFER 2048
+
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -25,4 +27,6 @@ char *_strcat(char *dest, const char *src);
 char *_strdup(const char *string);
 int _strcmp(const char *s1, const char *s2);
 void env(void);
+ssize_t _getline(char **lineptr, size_t *n, FILE *s);
+
 #endif
