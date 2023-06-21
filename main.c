@@ -13,7 +13,7 @@ void read_execute_loop(void)
 	while (1)
 	{
 		_puts("$ ");
-		num_chars = _getline(&lineptr, &n, stdin);
+		num_chars = getline(&lineptr, &n, stdin);
 		if (num_chars == EOF)
 		{
 			if (feof(stdin))
@@ -50,7 +50,7 @@ void free_argv(char **argv, int size)
 
 /**
  * main - Building shell to imitate bash.
- * @ac: Count of arguments.
+ * @argc: Count of arguments.
  * @argv: Arguments.
  * Return: 0, success.
  */
