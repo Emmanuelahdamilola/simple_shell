@@ -22,7 +22,7 @@ char *location(char *command)
 	if (path != NULL)
 	{
 		path_copy = _strdup(path);
-		path_token = strtok(path_copy, ":");
+		path_token = _strtok(path_copy, ":");
 
 		while (path_token != NULL)
 		{
@@ -38,7 +38,7 @@ char *location(char *command)
 				return (file_path);
 			}
 			free(file_path);
-			path_token = strtok(NULL, ":");
+			path_token = _strtok(NULL, ":");
 		}
 		free(path_copy);
 	}
@@ -57,7 +57,7 @@ void env(void)
 {
 	char **envptr;
 	int env_count;
-	char *env_string;
+	char *env_str;
 	size_t len_str;
 
 	envptr = environ;
@@ -66,14 +66,14 @@ void env(void)
 	while (*envptr != NULL)
 	{
 		len_str = _strlen(*envptr) + 1;
-		env_string = malloc(len_str);
+		env_str = malloc(len_str);
 
-		if (env_string != NULL)
+		if (env_str != NULL)
 		{
-			_strcpy(env_string, *envptr);
-			_strcat(env_string, "\n");
-			write(STDOUT_FILENO, env_string, len_str);
-			free(env_string);
+			_strcpy(env_str, *envptr);
+			_strcat(env_str, "\n");
+			write(STDOUT_FILENO, env_str, len_str);
+			free(env_str);
 		}
 		envptr++;
 		env_count++;
