@@ -17,7 +17,7 @@ char *_strchr(const char *s, int c)
 }
 
 /**
- * _strtok: breaks strings based on deliminating character
+ * _strtok - breaks strings based on deliminating character
  * @str: string to be passed
  * @delim: deliminating character
  * Return: strings broken down
