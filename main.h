@@ -31,5 +31,6 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *s);
 char *_strchr(const char *s, int c);
 char *_strtok(char *str, const char *delim);
 char *_getenv(const char *name);
+void change_dir(char **argv);
 
 #endif
