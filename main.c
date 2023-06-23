@@ -50,17 +50,23 @@ void free_argv(char **argv, int size)
 
 /**
  * main - Building shell to imitate bash.
- * @ac: Count of arguments.
+ * @argc: Count of arguments.
  * @argv: Arguments.
  * Return: 0, success.
  */
 int main(int argc, char **argv)
 {
+	char *command;
 
 	(void)argc;
 	(void)argv;
 
+	command = argv[0];
+	if (strcmp(command, "exit") == 0 && argc == 2)
+	{
+		location(command, argv);
+		return (0);
+	}
 	read_execute_loop();
-
 	return (0);
 }
