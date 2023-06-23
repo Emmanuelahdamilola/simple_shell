@@ -16,7 +16,9 @@ char *location(char *command, char **argv)
 
 	if (_strcmp(command, "exit") == 0 && argv[1] != NULL)
 	{
-		int status = atoi(argv[1]);
+		int status;
+
+		status = atoi(argv[1]);
 		exit(status);
 	}
 	if (_strcmp(command, "env") == 0)
@@ -85,7 +87,7 @@ char *construct_filepath(char *directory, char *command)
 	file_path = malloc(file_path_len);
 
 	if (file_path == NULL)
-		return NULL;
+		return (NULL);
 
 	_strcpy(file_path, directory);
 	_strcat(file_path, "/");
