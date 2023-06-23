@@ -13,30 +13,30 @@ void _execute(char **argv)
 	char *command_path;
 
 	if (argv)
-        {
-                if (_strcmp(argv[0], "exit") == 0)
-                {
-                        _puts("exiting shell...\n\n\n\n[exit]\n");
-                        exit(0);
-                }
-                command_path = location(argv[0], argv);
-                if (command_path == NULL)
-                {
-                        perror("Command not found");
-                        return;
-                }
-                child_pid = fork();
-                if (child_pid == -1)
-                {
-                        perror("fork error");
-                        return;
-                }
-                else if (child_pid == 0)
-                {
-                        execve(command_path, argv, NULL);
-                        perror("Command execution error");
-                        exit(EXIT_FAILURE);
-                }
+	{
+		if (_strcmp(argv[0], "exit") == 0)
+		{
+			_puts("exiting shell...\n\n\n\n[exit]\n");
+			exit(0);
+		}
+		command_path = location(argv[0], argv);
+		if (command_path == NULL)
+		{
+			perror("Command not found");
+			return;
+		}
+		child_pid = fork();
+		if (child_pid == -1)
+		{
+			perror("fork error");
+			return;
+		}
+		else if (child_pid == 0)
+		{
+			execve(command_path, argv, NULL);
+			perror("Command execution error");
+			exit(EXIT_FAILURE);
+		}
 		else
 		{
 			waitpid(child_pid, &status, 0);
