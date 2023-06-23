@@ -17,7 +17,7 @@ extern char **environ;
 int _puts(const char *str);
 int _putchar(char c);
 void _execute(char **argv);
-char *location(char *command);
+char *location(char *command, char **argv);
 void read_execute_loop(void);
 void parse_arguments(char *line);
 void free_argv(char **argv, int size);
@@ -26,7 +26,9 @@ char *_strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
 char *_strdup(const char *string);
 int _strcmp(const char *s1, const char *s2);
-void env(void);
+/*void env_vars(void);*/
+char *search_file_path(char *command);
+char *construct_filepath(char *directory, char *command);
 ssize_t _getline(char **lineptr, size_t *n, FILE *s);
 
 #endif
