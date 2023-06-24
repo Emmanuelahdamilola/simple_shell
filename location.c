@@ -1,21 +1,21 @@
 #include "main.h"
 /**
- * location - get file path
+ * location - get location path of command
  * @command: command from stdin
- * Return: file pth
+ * Return: file path
  */
 char *location(char *command)
 {
 	struct stat buffer;
 	char *path, *path_copy, *path_token, *file_path;
 	size_t file_path_len;
+	int command_found = 0;
 
 	if (_strcmp(command, "env") == 0)
 	{
 		env();
 		return (NULL);
 	}
-
 	if (stat(command, &buffer) == 0)
 		return (command);
 	path = getenv("PATH");
@@ -23,7 +23,6 @@ char *location(char *command)
 	{
 		path_copy = _strdup(path);
 		path_token = _strtok(path_copy, ":");
-
 		while (path_token != NULL)
 		{
 			file_path_len = _strlen(path_token) + 1 + _strlen(command) + 1;
@@ -31,19 +30,24 @@ char *location(char *command)
 			_strcpy(file_path, path_token);
 			_strcat(file_path, "/");
 			_strcat(file_path, command);
-
 			if (access(file_path, X_OK) == 0)
 			{
-				free(path_copy);
-				return (file_path);
+				command_found = 1;
+				break;
 			}
 			free(file_path);
 			path_token = _strtok(NULL, ":");
 		}
 		free(path_copy);
 	}
-	return (NULL);
+	if (!command_found)
+	{
+		perror("Command not found");
+		return (NULL);
+	}
+	return (file_path);
 }
+
 
 /**
  * env - function that print environment variables and their value
