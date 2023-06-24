@@ -81,22 +81,22 @@ char *search_file_path(char *command)
 /**
  * construct_filepath - function that construct the file path
  * by combining directory and command
- * @directory: directory from the PATH
+ * @dir: directory from the PATH
  * @command: command to append to the directory
  * Return: constructed file path
  */
-char *construct_filepath(char *directory, char *command)
+char *construct_filepath(char *dir, char *command)
 {
 	size_t file_path_len;
 	char *file_path;
 
-	file_path_len = _strlen(directory) + 1 + _strlen(command) + 1;
+	file_path_len = _strlen(dir) + 1 + _strlen(command) + 1;
 	file_path = malloc(file_path_len);
 
 	if (file_path == NULL)
 		return (NULL);
 
-	_strcpy(file_path, directory);
+	_strcpy(file_path, dir);
 	_strcat(file_path, "/");
 	_strcat(file_path, command);
 	return (file_path);
