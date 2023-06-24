@@ -15,11 +15,11 @@ void parse_arguments(char *line)
 		perror("Memory allocation error");
 		return;
 	}
-	token = strtok(line, delim);
+	token = _strtok(line, delim);
 	while (token != NULL)
 	{
 		count_tokens++;
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	count_tokens++;
 	argv = malloc(sizeof(char *) * count_tokens);
@@ -29,7 +29,7 @@ void parse_arguments(char *line)
 		free(lineptr_copy);
 		return;
 	}
-	token = strtok(lineptr_copy, delim);
+	token = _strtok(lineptr_copy, delim);
 	for (i = 0; token != NULL; i++)
 	{
 		argv[i] = _strdup(token);
@@ -39,7 +39,7 @@ void parse_arguments(char *line)
 			free(lineptr_copy);
 			return;
 		}
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	argv[i] = NULL;
 	_execute(argv);
