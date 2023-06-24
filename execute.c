@@ -19,9 +19,6 @@ void _execute(char **argv)
 			_puts("exiting shell...\n\n\n\n[exit]\n");
 			exit(0);
 		}
-		if (_strcmp(argv[0], "cd") == 0)
-				change_dir(argv);
-		
 		command_path = location(argv[0]);
 		if (command_path == NULL)
 		{
