@@ -19,7 +19,7 @@ void _execute(char **argv)
 			_puts("exiting shell...\n\n\n\n[exit]\n");
 			exit(0);
 		}
-		command_path = location(argv[0]);
+		command_path = location(argv[0], argv);
 		if (command_path == NULL)
 		{
 			perror("Command not found");
@@ -33,7 +33,6 @@ void _execute(char **argv)
 		}
 		else if (child_pid == 0)
 		{
-			/*printf("Executing command: %s\n", command_path);*/
 			execve(command_path, argv, NULL);
 			perror("Command execution error");
 			exit(EXIT_FAILURE);
@@ -46,6 +45,6 @@ void _execute(char **argv)
 			else if (WIFSIGNALED(status))
 				WTERMSIG(status);
 		}
-		/*free(command_path);*/
 	}
 }
+
