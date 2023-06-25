@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <stdbool.h>
 
 extern char **environ;
 
@@ -34,5 +35,7 @@ char *_strchr(const char *s, int c);
 char *_strtok(char *str, const char *delim);
 char *_getenv(const char *name);
 void change_dir(char **argv);
+int _strncmp(const char *str1, const char *str2, size_t n);
+void separator(char *line);
 
 #endif
