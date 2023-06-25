@@ -6,7 +6,7 @@
 void parse_arguments(char *line)
 {
 	char *token, **argv, *lineptr_copy = NULL;
-	const char *delim = " \n";
+	const char *delim = " \n;";
 	int i, count_tokens = 0;
 
 	lineptr_copy = _strdup(line);
