@@ -51,7 +51,7 @@ char *search_file_path(char *command)
 	char *file_path;
 	int command_found = 0;
 
-	path = getenv("PATH");
+	path = _getenv("PATH");
 	if (path == NULL)
 		return (NULL);
 
@@ -101,5 +101,3 @@ char *construct_filepath(char *dir, char *command)
 	_strcat(file_path, command);
 	return (file_path);
 }
-
-
