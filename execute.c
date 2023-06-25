@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _execute - execuute the command
  * @argv: The array of command arguments
@@ -46,5 +47,4 @@ void _execute(char **argv)
 				WTERMSIG(status);
 		}
 	}
-}
-
+} 
