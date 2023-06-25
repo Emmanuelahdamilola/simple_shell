@@ -1,15 +1,16 @@
 #include "main.h"
 /**
- * _getline - function that receives input from user via stdin
- * @lineptr: address of the input
- * @n: number of bytes
- * @s: stdin
- * Return: input
+ * _getline - reads input from user
+ * @lineptr: pointer to the address of the input
+ * @n: number of bytes read
+ * @s: input from user
+ *
+ * Return: character read
  */
 ssize_t _getline(char **lineptr, size_t *n, FILE *s)
 {
 	static char buf[BUFFER];
-	static size_t i; /* i = index */
+	static ssize_t i; /* i = index */
 	ssize_t bytr = 0, total_bytes = 0; /** bytr = bytes_read*/
 
 	if (lineptr == NULL || n == NULL || s == NULL)
@@ -21,9 +22,9 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *s)
 		if (*lineptr == NULL)
 			return (-1);
 	}
-	while ((size_t)i < (size_t)bytr || (bytr = read(fileno(s), buf, BUFFER)) > 0)
+	while (i < bytr || (bytr = read(fileno(s), buf, BUFFER)) > 0)
 	{
-		i = i % (size_t)bytr;
+		i = i % bytr;
 		if ((size_t)total_bytes >= *n - 1)
 			return (-1);
 		if (buf[i] == '\n')
