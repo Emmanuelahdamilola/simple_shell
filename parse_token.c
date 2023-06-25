@@ -1,5 +1,18 @@
 #include "main.h"
 /**
+ * ignore_comments - function ignore comments
+ * @line: command passed
+ * Return: void
+ */
+void ignore_comments(char *line)
+{
+	char *comment_pos = strchr(line, '#');
+
+	if (comment_pos != NULL)
+		*comment_pos = '\0';
+}
+
+/**
  * parse_arguments - Tokenize(split) the input line and execute the command
  * @line: The input line to be parsed
  */
@@ -9,12 +22,10 @@ void parse_arguments(char *line)
 	const char *delim = " \n;'&&''||'";
 	int i, count_tokens = 0;
 
+	ignore_comments(line);
 	lineptr_copy = _strdup(line);
 	if (lineptr_copy == NULL)
-	{
-		perror("Memory allocation error");
 		return;
-	}
 	token = _strtok(line, delim);
 	while (token != NULL)
 	{

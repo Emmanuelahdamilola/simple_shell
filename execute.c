@@ -47,4 +47,4 @@ void _execute(char **argv)
 				WTERMSIG(status);
 		}
 	}
-} 
+}
