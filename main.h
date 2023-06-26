@@ -34,5 +34,6 @@ char *_strchr(const char *s, int c);
 char *_strtok(char *str, const char *delim);
 char *_getenv(const char *name);
 void change_dir(char **argv);
-
+void _setenv(char *args[]);
+void _unsetenv(char *args[]);
 #endif
