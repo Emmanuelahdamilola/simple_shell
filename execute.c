@@ -17,13 +17,13 @@ void _execute(char **argv)
 	{
 		if (_strcmp(argv[0], "exit") == 0)
 		{
-			_puts("exiting shell...\n\n\n\n[exit]\n");
+			_puts("exit\n\n\n[Disconnected...]\n");
 			exit(0);
 		}
 		command_path = location(argv[0], argv);
 		if (command_path == NULL)
 		{
-			perror("Command not found");
+			_puts("Command not found\n");
 			return;
 		}
 		child_pid = fork();
