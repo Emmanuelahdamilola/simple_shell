@@ -38,6 +38,7 @@ void parse_arguments(char *line)
 	{
 		perror("Memory allocation error");
 		free(lineptr_copy);
+		free(argv);
 		return;
 	}
 	token = _strtok(lineptr_copy, delim);
@@ -48,6 +49,7 @@ void parse_arguments(char *line)
 		{
 			perror("Memory allocation error"); /*free_argv(argv, i);*/
 			free(lineptr_copy);
+			free(argv);
 			return;
 		}
 		token = _strtok(NULL, delim);

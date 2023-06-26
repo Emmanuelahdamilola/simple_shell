@@ -36,7 +36,6 @@ void read_execute_loop(void)
 		else
 			break;
 	}
-
 	free(lineptr);
 }
 
@@ -54,7 +53,7 @@ int main(int argc, char **argv)
 	(void)argv;
 
 	command = argv[0];
-	if (strcmp(command, "exit") == 0 && argc == 2)
+	if (_strcmp(command, "exit") == 0 && argc == 2)
 	{
 		location(command, argv);
 		return (0);

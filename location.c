@@ -1,46 +1,4 @@
 #include "main.h"
-#include "main.h"
-
-/**
- * _setenv - function that initializes a new environment
- * variable or modifies an existing one based on the
- * command syntax: setenv VARIABLE VALUE.
- * @args: arguments
- *
- * Return: nothing
- */
-void _setenv(char *args[])
-{
-    if (args[1] == NULL || args[2] == NULL)
-    {
-        write(STDERR_FILENO, "Usage: setenv VARIABLE VALUE\n", 29);
-        return;
-    }
-    if (setenv(args[1], args[2], 1) == -1)
-    {
-        write(STDERR_FILENO, "Error: Failed to set environment variable\n", 42);
-    }
-}
-
-/**
- * _unsetenv - function that removes an environment variable
- * based on the command syntax: unsetenv VARIABLE.
- * @args: arguments
- *
- * Return: nothing
- */
-void _unsetenv(char *args[])
-{
-    if (args[1] == NULL)
-    {
-        write(STDERR_FILENO, "Usage: unsetenv VARIABLE\n", 25);
-        return;
-    }
-    if (unsetenv(args[1]) == -1)
-    {
-        write(STDERR_FILENO, "Error: Failed to unset environment variable\n", 44);
-    }
-}
 
 /**
  * location - get file path
@@ -132,7 +90,7 @@ char *unsetenvCommand(char **argv)
  */
 char *search_file_path(char *command)
 {
-	char *path;
+	char *path, *found_path = NULL;
 	char *path_copy, *path_token;
 	char *file_path;
 	int command_found = 0;
@@ -142,26 +100,25 @@ char *search_file_path(char *command)
 		return (NULL);
 
 	path_copy = _strdup(path);
-	path_token = strtok(path_copy, ":");
+	path_token = _strtok(path_copy, ":");
 	while (path_token != NULL)
 	{
 		file_path = construct_filepath(path_token, command);
 		if (access(file_path, X_OK) == 0)
 		{
 			command_found = 1;
+			found_path = file_path;
 			break;
 		}
 		free(file_path);
-		path_token = strtok(NULL, ":");
+		path_token = _strtok(NULL, ":");
 	}
 	free(path_copy);
 	if (!command_found)
-	{
-		perror("Command not found");
+		/*perror("Command not found");*/
 		return (NULL);
-	}
-	return (file_path);
-	/*return (NULL);*/
+	/*return (file_path);return (NULL);*/
+	return (found_path);
 }
 
 /**
