@@ -37,5 +37,8 @@ char *_getenv(const char *name);
 void change_dir(char **argv);
 int _strncmp(const char *str1, const char *str2, size_t n);
 void separator(char *line);
-
+char *setenvCommand(char **argv);
+char *unsetenvCommand(char **argv);
+void _setenv(char *args[]);
+void _unsetenv(char *args[]);
 #endif

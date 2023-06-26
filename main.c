@@ -9,10 +9,13 @@ void read_execute_loop(void)
 	char *lineptr = NULL;
 	size_t n = 0;
 	ssize_t num_chars;
+	int interactive_mode;
 
+	interactive_mode = isatty(STDIN_FILENO);
 	while (1)
 	{
-		_puts("$ ");
+		if (interactive_mode)
+		_puts("($) ");
 		num_chars = getline(&lineptr, &n, stdin);
 		if (num_chars == EOF)
 		{
@@ -28,7 +31,12 @@ void read_execute_loop(void)
 			break;
 		}
 		parse_arguments(lineptr);
+		if (interactive_mode)
+			continue;
+		else
+			break;
 	}
+
 	free(lineptr);
 }
 

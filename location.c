@@ -1,4 +1,46 @@
 #include "main.h"
+#include "main.h"
+
+/**
+ * _setenv - function that initializes a new environment
+ * variable or modifies an existing one based on the
+ * command syntax: setenv VARIABLE VALUE.
+ * @args: arguments
+ *
+ * Return: nothing
+ */
+void _setenv(char *args[])
+{
+    if (args[1] == NULL || args[2] == NULL)
+    {
+        write(STDERR_FILENO, "Usage: setenv VARIABLE VALUE\n", 29);
+        return;
+    }
+    if (setenv(args[1], args[2], 1) == -1)
+    {
+        write(STDERR_FILENO, "Error: Failed to set environment variable\n", 42);
+    }
+}
+
+/**
+ * _unsetenv - function that removes an environment variable
+ * based on the command syntax: unsetenv VARIABLE.
+ * @args: arguments
+ *
+ * Return: nothing
+ */
+void _unsetenv(char *args[])
+{
+    if (args[1] == NULL)
+    {
+        write(STDERR_FILENO, "Usage: unsetenv VARIABLE\n", 25);
+        return;
+    }
+    if (unsetenv(args[1]) == -1)
+    {
+        write(STDERR_FILENO, "Error: Failed to unset environment variable\n", 44);
+    }
+}
 
 /**
  * location - get file path
@@ -33,11 +75,55 @@ char *location(char *command, char **argv)
 			envptr++;
 		}
 	}
+	if (_strcmp(command, "setenv") == 0)
+		return (setenvCommand(argv));
+
+	if (_strcmp(command, "unsetenv") == 0)
+		return (unsetenvCommand(argv));
 
 	file_path = search_file_path(command);
 	return (file_path);
 }
-
+/**
+ * setenvCommand - function that handles the setenv command
+ * @argv: argument vector
+ * Return: NULL
+ */
+char *setenvCommand(char **argv)
+{
+	if (argv[1] && argv[2])
+	{
+		if (setenv(argv[1], argv[2], 1) == -1)
+		{
+			perror("Erro:");
+		}
+	}
+	else
+	{
+		write(STDERR_FILENO, "Syntax: setenv VARIABLE VALUE\n", 30);
+	}
+	return (NULL);
+}
+/**
+ * unsetenvCommand - function that handles the unsetenv command
+ * @argv: argument vector
+ * Return: NULL
+ */
+char *unsetenvCommand(char **argv)
+{
+	if (argv[1])
+	{
+		if (unsetenv(argv[1]) == -1)
+		{
+			perror("Error:");
+		}
+	}
+	else
+	{
+		write(STDERR_FILENO, "Syntax: unsetenv VARIABLE\n", 27);
+	}
+	return (NULL);
+}
 /**
  * search_file_path - function that searches for the file
  * in the PATH environment variable
