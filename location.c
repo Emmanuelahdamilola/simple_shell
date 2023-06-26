@@ -33,11 +33,55 @@ char *location(char *command, char **argv)
 			envptr++;
 		}
 	}
+	if (_strcmp(command, "setenv") == 0)
+		return (setenvCommand(argv));
+
+	if (_strcmp(command, "unsetenv") == 0)
+		return (unsetenvCommand(argv));
 
 	file_path = search_file_path(command);
 	return (file_path);
 }
-
+/**
+ * setenvCommand - function that handles the setenv command
+ * @argv: argument vector
+ * Return: NULL
+ */
+char *setenvCommand(char **argv)
+{
+	if (argv[1] && argv[2])
+	{
+		if (setenv(argv[1], argv[2], 1) == -1)
+		{
+			perror("Erro:");
+		}
+	}
+	else
+	{
+		write(STDERR_FILENO, "Syntax: setenv VARIABLE VALUE\n", 30);
+	}
+	return (NULL);
+}
+/**
+ * unsetenvCommand - function that handles the unsetenv command
+ * @argv: argument vector
+ * Return: NULL
+ */
+char *unsetenvCommand(char **argv)
+{
+	if (argv[1])
+	{
+		if (unsetenv(argv[1]) == -1)
+		{
+			perror("Error:");
+		}
+	}
+	else
+	{
+		write(STDERR_FILENO, "Syntax: unsetenv VARIABLE\n", 27);
+	}
+	return (NULL);
+}
 /**
  * search_file_path - function that searches for the file
  * in the PATH environment variable
