@@ -15,7 +15,7 @@ void read_execute_loop(void)
 	while (1)
 	{
 		if (interactive_mode)
-			_puts("($) ");
+		_puts("($) ");
 		num_chars = getline(&lineptr, &n, stdin);
 		if (num_chars == EOF)	
 		{
@@ -27,10 +27,13 @@ void read_execute_loop(void)
 			break;
 		}
 		parse_arguments(lineptr);
+		if (interactive_mode)
+			continue;
+		else
+			break;
 	}
 	free(lineptr);
 }
-
 
 /**
  * main - Building shell to imitate bash.
