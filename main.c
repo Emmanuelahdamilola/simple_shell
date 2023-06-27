@@ -17,7 +17,7 @@ void read_execute_loop(void)
 		if (interactive_mode)
 		_puts("($) ");
 		num_chars = getline(&lineptr, &n, stdin);
-		if (num_chars == EOF)	
+		if (num_chars == EOF)
 		{
 			if (feof(stdin))
 				_puts("Error reading input\n");
