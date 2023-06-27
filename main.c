@@ -10,7 +10,6 @@ void read_execute_loop(void)
 	size_t n = 0;
 	ssize_t num_chars;
 	int interactive_mode;
-	int lineptr_freed = 0;
 
 	interactive_mode = isatty(STDIN_FILENO);
 	while (1)
@@ -18,33 +17,27 @@ void read_execute_loop(void)
 		if (interactive_mode)
 			_puts("($) ");
 		num_chars = getline(&lineptr, &n, stdin);
-		if (num_chars <= 0)
+		if (num_chars == EOF)
 		{
-			if (num_chars == -1)
-			{
-				if (feof(stdin))
-					_puts("Error reading input\n");
-			}
-			else if (num_chars == 0)
+			if (feof(stdin))
+				/*perror*/
 				_puts("Terminating shell\n");
-			if (!lineptr_freed)
+			else
 			{
-				free(lineptr);
-				lineptr_freed = 1;
+				/*perror*/
+				_puts("Error\n");
 			}
+			free(lineptr);
 			break;
 		}
 		parse_arguments(lineptr);
 		if (interactive_mode)
-			_putchar('\n');
-		if (!interactive_mode)
+			continue;
+		else
 			break;
 	}
-	if (!lineptr_freed)
-		free(lineptr);
 	free(lineptr);
 }
-
 /**
  * main - Building shell to imitate bash.
  * @argc: Count of arguments.
