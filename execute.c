@@ -17,7 +17,7 @@ void _execute(char **argv)
 	{
 		if (_strcmp(argv[0], "exit") == 0)
 		{
-			_puts("exit\n\n\n[Disconnected...]\n");
+			/*_puts("exit\n\n\n[Disconnected...]\n");*/
 			exit(0);
 		}
 		command_path = location(argv[0], argv);
