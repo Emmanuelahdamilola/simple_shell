@@ -23,14 +23,10 @@ void read_execute_loop(void)
 			if (num_chars == -1)
 			{
 				if (feof(stdin))
-					/*perror*/
 					_puts("Error reading input\n");
 			}
 			else if (num_chars == 0)
-			{
-				/*perror*/
 				_puts("Terminating shell\n");
-			}
 			if (!lineptr_freed)
 			{
 				free(lineptr);
@@ -46,7 +42,6 @@ void read_execute_loop(void)
 	}
 	if (!lineptr_freed)
 		free(lineptr);
-
 	free(lineptr);
 }
 
