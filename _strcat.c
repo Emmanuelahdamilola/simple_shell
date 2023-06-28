@@ -10,7 +10,7 @@ char *_strcat(char *dest, const char *src)
 {
 	int dest_len = 0;
 	int i = 0;
-	
+
 	if (src == NULL || dest == NULL)
 		return (NULL);
 	/* Find the length of the destination string */
