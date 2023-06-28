@@ -1,8 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define BUFFER 2048
-#define UNUSED(x) (void)(x)
+#define BUFFER_SIZE 1024
 
 #include <stdio.h>
 #include <unistd.h>
@@ -13,10 +12,10 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <stdbool.h>
-#include <signal.h>
 
 extern char **environ;
 
+ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream);
 int _puts(const char *str);
 int _putchar(char c);
 void _execute(char **argv);

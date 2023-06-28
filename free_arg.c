@@ -11,7 +11,8 @@ void free_argv(char **argv, int size)
 	int i;
 
 	for (i = 0; i < size; i++)
+	{
 		free(argv[i]);
-
+	}
 	free(argv);
 }

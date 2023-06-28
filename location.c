@@ -16,6 +16,7 @@ char *location(char *command, char **argv)
 	if (_strcmp(command, "exit") == 0 && argv[1] != NULL)
 	{
 		status = atoi(argv[1]);
+		/*i want the status to be the return value of the last command*/
 		if (atoi(argv[1]) < 0)
 		{
 			write(STDERR_FILENO, "illegal number\n", 15);
