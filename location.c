@@ -109,6 +109,7 @@ char *search_file_path(char *command)
 			break;
 		}
 		free(file_path);
+		file_path = NULL;
 		path_token = _strtok(NULL, ":");
 	}
 	free(path_copy);

@@ -30,6 +30,7 @@ void _execute(char **argv)
 		else if (child_pid == 0)
 		{
 			execve(command_path, argv, NULL);
+			free(command_path);
 			write(STDERR_FILENO, "Command execution error\n", 24);
 			exit(EXIT_FAILURE);
 		}

@@ -15,7 +15,7 @@ void read_execute_loop(void)
 	while (1)
 	{
 		if (interactive_mode)
-		_puts("($) ");
+			_puts("($) ");
 		num_chars = getline(&lineptr, &n, stdin);
 		if (num_chars == EOF)
 		{
@@ -23,14 +23,16 @@ void read_execute_loop(void)
 				_puts("Error reading input\n");
 			else
 				_puts("Error\n");
-			/*free(lineptr);*/
 			break;
 		}
+		if (num_chars > 0 && lineptr[num_chars - 1] == '\n')
+			lineptr[num_chars - 1] = '\0';
 		parse_arguments(lineptr);
-		if (interactive_mode)
-			continue;
-		else
+		if (!interactive_mode)
 			break;
+		free(lineptr);
+		lineptr = NULL;
+		n = 0;
 	}
 	free(lineptr);
 }

@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #define BUFFER 2048
+#define UNUSED(x) (void)(x)
 
 #include <stdio.h>
 #include <unistd.h>
@@ -12,6 +13,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <stdbool.h>
+#include <signal.h>
 
 extern char **environ;
 
@@ -41,6 +43,5 @@ char *setenvCommand(char **argv);
 char *unsetenvCommand(char **argv);
 void _setenv(char *args[]);
 void _unsetenv(char *args[]);
-
 
 #endif
