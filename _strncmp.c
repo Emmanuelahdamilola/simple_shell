@@ -12,7 +12,7 @@
 int _strncmp(const char *str1, const char *str2, size_t n)
 {
 	size_t i;
-	
+
 	if (str1 == NULL || str2 == NULL)
 		return (0);
 	for (i = 0; i < n; i++)

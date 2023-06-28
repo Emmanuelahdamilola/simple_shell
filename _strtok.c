@@ -29,7 +29,7 @@ char *_strtok(char *str, const char *delim)
 
 	if (str == NULL)
 		str = token_next;
-	
+
 	if (str == NULL)
 		return (NULL);
 
