@@ -23,7 +23,7 @@ void read_execute_loop(void)
 				_puts("Error reading input\n");
 			else
 				_puts("Error\n");
-			free(lineptr);
+			/*free(lineptr);*/
 			break;
 		}
 		parse_arguments(lineptr);

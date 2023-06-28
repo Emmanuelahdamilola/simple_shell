@@ -1,5 +1,18 @@
 #include "main.h"
 
+void parse_operators(char *command)
+{
+	char *token;
+	const char *delim = "&&||";
+	
+	token = _strtok(command, delim);
+	while (token != NULL)
+	{
+		_execute(&command);
+		token = _strtok(NULL, delim);
+	}
+}
+
 /**
  * ignore_comments - function ignore comments
  * @line: command passed
@@ -20,7 +33,7 @@ void ignore_comments(char *line)
 void parse_arguments(char *line)
 {
 	char *token, **argv, *lineptr_copy = NULL;
-	const char *delim = " \n";
+	const char *delim = " \n;";
 	int i, count_tokens = 0;
 
 	ignore_comments(line);
@@ -37,8 +50,9 @@ void parse_arguments(char *line)
 	argv = malloc(sizeof(char *) * count_tokens);
 	if (argv == NULL)
 	{
-		write(STDERR_FILENO, "Memory allocation error\n", 24);
+		perror("Memory allocation error");
 		free(lineptr_copy);
+		free(argv);
 		return;
 	}
 	token = _strtok(lineptr_copy, delim);
@@ -47,15 +61,15 @@ void parse_arguments(char *line)
 		argv[i] = _strdup(token);
 		if (argv[i] == NULL)
 		{
-			write(STDERR_FILENO, "Memory allocation error\n", 24);
+			perror("Memory allocation error"); /*free_argv(argv, i);*/
 			free_argv(argv, i);
 			free(lineptr_copy);
 			return;
 		}
 		token = _strtok(NULL, delim);
 	}
-	argv[i] = NULL;
-	_execute(argv);
+	for (i = 0; i < count_tokens; i++)
+		parse_operators(argv[i]);
 	free_argv(argv, i);
 	free(lineptr_copy);
 }

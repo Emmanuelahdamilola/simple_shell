@@ -15,27 +15,22 @@ void _execute(char **argv)
 
 	if (argv)
 	{
-		if (_strcmp(argv[0], "exit") == 0)
-		{
-			/*_puts("exit\n\n\n[Disconnected...]\n");*/
-			exit(0);
-		}
 		command_path = location(argv[0], argv);
 		if (command_path == NULL)
 		{
-			_puts("Command not found\n");
+			/*write(STDERR_FILENO, "Command not found\n", 18);*/
 			return;
 		}
 		child_pid = fork();
 		if (child_pid == -1)
 		{
-			perror("fork error");
+			write(STDERR_FILENO, "fork error\n", 19);
 			return;
 		}
 		else if (child_pid == 0)
 		{
 			execve(command_path, argv, NULL);
-			perror("Command execution error");
+			write(STDERR_FILENO, "Command execution error\n", 24);
 			exit(EXIT_FAILURE);
 		}
 		else

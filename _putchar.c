@@ -9,6 +9,8 @@
 
 int _putchar(char c)
 {
+	if (c == '\0')
+		return (0);
 	if (write(1, &c, 1) == 1)
 	{
 		return ((unsigned char) c);

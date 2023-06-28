@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * location - get file path
  * @command: command from stdin
@@ -9,22 +8,25 @@
 char *location(char *command, char **argv)
 {
 	struct stat buffer;
-	char *file_path;
+	char *file_path, **envptr;
+	int status = 0;
 
 	if (stat(command, &buffer) == 0)
 		return (command);
-
 	if (_strcmp(command, "exit") == 0 && argv[1] != NULL)
 	{
-		int status;
-
 		status = atoi(argv[1]);
+		if (atoi(argv[1]) < 0)
+		{
+			write(STDERR_FILENO, "illegal number\n", 15);
+			return (NULL);
+		}
 		exit(status);
 	}
+	else if (_strcmp(command, "exit") == 0 && argv[1] == NULL)
+		exit(status);
 	if (_strcmp(command, "env") == 0)
 	{
-		char **envptr;
-
 		envptr = environ;
 		while (*envptr != NULL)
 		{
@@ -35,10 +37,8 @@ char *location(char *command, char **argv)
 	}
 	if (_strcmp(command, "setenv") == 0)
 		return (setenvCommand(argv));
-
 	if (_strcmp(command, "unsetenv") == 0)
 		return (unsetenvCommand(argv));
-
 	file_path = search_file_path(command);
 	return (file_path);
 }
@@ -52,14 +52,10 @@ char *setenvCommand(char **argv)
 	if (argv[1] && argv[2])
 	{
 		if (setenv(argv[1], argv[2], 1) == -1)
-		{
-			perror("Erro:");
-		}
+			write(STDERR_FILENO, "Error", 6);
 	}
 	else
-	{
 		write(STDERR_FILENO, "Syntax: setenv VARIABLE VALUE\n", 30);
-	}
 	return (NULL);
 }
 /**
@@ -72,9 +68,7 @@ char *unsetenvCommand(char **argv)
 	if (argv[1])
 	{
 		if (unsetenv(argv[1]) == -1)
-		{
-			perror("Error:");
-		}
+			write(STDERR_FILENO, "Error\n", 7);
 	}
 	else
 	{
@@ -98,12 +92,16 @@ char *search_file_path(char *command)
 	path = _getenv("PATH");
 	if (path == NULL)
 		return (NULL);
-
 	path_copy = _strdup(path);
 	path_token = _strtok(path_copy, ":");
 	while (path_token != NULL)
 	{
 		file_path = construct_filepath(path_token, command);
+		if (file_path == NULL)
+		{
+			free(path_copy);
+			return (NULL);
+		}
 		if (access(file_path, X_OK) == 0)
 		{
 			command_found = 1;
@@ -115,9 +113,10 @@ char *search_file_path(char *command)
 	}
 	free(path_copy);
 	if (!command_found)
-		/*perror("Command not found");*/
+	{
+		write(STDERR_FILENO, "Command not found\n", 18);
 		return (NULL);
-	/*return (file_path);return (NULL);*/
+	}
 	return (found_path);
 }
 
