@@ -34,7 +34,7 @@ void read_execute_loop(void)
 		lineptr = NULL;
 		n = 0;
 	}
-	free(lineptr);
+	/*free(lineptr);*/
 }
 
 /**

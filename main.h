@@ -43,5 +43,6 @@ char *setenvCommand(char **argv);
 char *unsetenvCommand(char **argv);
 void _setenv(char *args[]);
 void _unsetenv(char *args[]);
-
+void _itoa_alt(int num, char *str, int size);
+void _variables(char **argv);
 #endif
