@@ -12,7 +12,9 @@
 int _strncmp(const char *str1, const char *str2, size_t n)
 {
 	size_t i;
-
+	
+	if (str1 == NULL || str2 == NULL)
+		return (0);
 	for (i = 0; i < n; i++)
 	{
 		if (str1[i] != str2[i])
@@ -22,9 +24,9 @@ int _strncmp(const char *str1, const char *str2, size_t n)
 			else
 				return (1);
 		}
-		else if (str1[i] == '\0')
-			return (0);
 	}
+	if (i == n || str1[i] == '\0')
+		return (0);
 	return (0);
 }
 
