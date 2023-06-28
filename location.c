@@ -105,9 +105,7 @@ char *search_file_path(char *command)
 		if (access(file_path, X_OK) == 0)
 		{
 			command_found = 1;
-			/*found_path = file_path;*/
-			found_path = _strdup(file_path);
-			free(file_path);
+			found_path = file_path;
 			break;
 		}
 		free(file_path);
