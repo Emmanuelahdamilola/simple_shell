@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * ignore_comments - function ignore comments
  * @line: command passed
@@ -6,7 +7,7 @@
  */
 void ignore_comments(char *line)
 {
-	char *comment_pos = strchr(line, '#');
+	char *comment_pos = _strchr(line, '#');
 
 	if (comment_pos != NULL)
 		*comment_pos = '\0';
@@ -19,7 +20,7 @@ void ignore_comments(char *line)
 void parse_arguments(char *line)
 {
 	char *token, **argv, *lineptr_copy = NULL;
-	const char *delim = " \n;'&&''||'";
+	const char *delim = " \n";
 	int i, count_tokens = 0;
 
 	ignore_comments(line);
@@ -36,9 +37,8 @@ void parse_arguments(char *line)
 	argv = malloc(sizeof(char *) * count_tokens);
 	if (argv == NULL)
 	{
-		perror("Memory allocation error");
+		write(STDERR_FILENO, "Memory allocation error\n", 24);
 		free(lineptr_copy);
-		free(argv);
 		return;
 	}
 	token = _strtok(lineptr_copy, delim);
@@ -47,9 +47,9 @@ void parse_arguments(char *line)
 		argv[i] = _strdup(token);
 		if (argv[i] == NULL)
 		{
-			perror("Memory allocation error"); /*free_argv(argv, i);*/
+			write(STDERR_FILENO, "Memory allocation error\n", 24);
+			free_argv(argv, i);
 			free(lineptr_copy);
-			free(argv);
 			return;
 		}
 		token = _strtok(NULL, delim);
