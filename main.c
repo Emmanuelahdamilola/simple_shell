@@ -16,7 +16,7 @@ void read_execute_loop(void)
 	{
 		if (interactive_mode)
 			_puts("($) ");
-		num_chars = getline(&lineptr, &n, stdin);
+		num_chars = custom_getline(&lineptr, &n, stdin);
 		if (num_chars == EOF)
 		{
 			if (feof(stdin))
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 {
 	char *command;
 
-	(void)argc;
+	/*(void)argc;*/
 	(void)argv;
 
 	command = argv[0];
