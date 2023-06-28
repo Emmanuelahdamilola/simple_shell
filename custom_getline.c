@@ -14,7 +14,7 @@ int read_buff(FILE *stream, char *buffer, ssize_t *bytes_read)
 }
 
 /**
- * _null_terminateline - function that appends a null character
+ * null_terminateline - function that appends a null character
  * @line_length: appends a null character at this position
  * @line: buffer
  * @line_size: size line
@@ -49,7 +49,7 @@ int null_terminateline(char **line, size_t line_size, size_t line_length)
  * Return: 1 if the line buffer expansion was successful,
  *	or 0 if there was a memory allocation failure
  */
-int expand_line_buffer(char **line, size_t *line_size, size_t line_length)
+int expand_line_buff(char **line, size_t *line_size, size_t line_length)
 {
 	size_t newSize;
 	char *newline;
@@ -102,7 +102,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream)
 			*n = line_size;
 			return (line_length);
 		}
-		if (!expand_line_buffer(&line, &line_size, line_length))
+		if (!expand_line_buff(&line, &line_size, line_length))
 			return (-1);
 		line[line_length] = buff[buff_pos];
 		buff_pos++;
