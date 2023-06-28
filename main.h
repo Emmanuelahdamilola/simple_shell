@@ -14,7 +14,9 @@
 #include <stdbool.h>
 
 extern char **environ;
-
+int read_buff(FILE *stream, char *buffer, ssize_t *bytes_read);
+int null_terminateline(char **line, size_t line_size, size_t line_length);
+int expand_line_buffer(char **line, size_t *line_size, size_t line_length);
 ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream);
 int _puts(const char *str);
 int _putchar(char c);
