@@ -29,11 +29,11 @@ void read_execute_loop(void)
 				break;
 			}
 			parse_arguments(lineptr);
-			_puts("($) ");
+			if (interactive_mode)
+                        	_puts("($) ");
 		}
 		if (!interactive_mode)
 		{
-			printf("herrr");
 			break;
 		}
 		free(lineptr);
