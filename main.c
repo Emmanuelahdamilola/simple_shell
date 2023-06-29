@@ -16,20 +16,26 @@ void read_execute_loop(void)
 	{
 		if (interactive_mode)
 			_puts("($) ");
-		num_chars = custom_getline(&lineptr, &n, stdin);
-		if (num_chars == EOF)
+		while ((num_chars = getline(&lineptr, &n, stdin)) != -1)
 		{
-			if (feof(stdin))
-				_puts("Error reading input\n");
-			else
-				_puts("Error\n");
+			if (num_chars > 0 && lineptr[num_chars - 1] == '\n')
+				lineptr[num_chars - 1] = '\0';
+			if (num_chars == EOF)
+			{
+				if (feof(stdin))
+					_puts("Error reading input\n");
+				else
+					_puts("Error\n");
+				break;
+			}
+			parse_arguments(lineptr);
+			_puts("($) ");
+		}
+		if (!interactive_mode)
+		{
+			printf("herrr");
 			break;
 		}
-		if (num_chars > 0 && lineptr[num_chars - 1] == '\n')
-			lineptr[num_chars - 1] = '\0';
-		parse_arguments(lineptr);
-		if (!interactive_mode)
-			break;
 		free(lineptr);
 		lineptr = NULL;
 		n = 0;
