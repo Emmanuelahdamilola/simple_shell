@@ -30,7 +30,7 @@ void read_execute_loop(void)
 			}
 			parse_arguments(lineptr);
 			if (interactive_mode)
-                        	_puts("($) ");
+				_puts("($) ");
 		}
 		if (!interactive_mode)
 		{
