@@ -7,10 +7,19 @@
  */
 void ignore_comments(char *line)
 {
-	char *comment_pos = _strchr(line, '#');
+	char *com = strchr(line, '#');
 
-	if (comment_pos != NULL)
-		*comment_pos = '\0';
+	if (com != NULL)
+	{
+		if (com == line && (*(com - 1) == ' ' || *(com - 1) == '\t'))
+		{
+			*com = '\0';
+		}
+		else if (*(com - 1) == ' ' || *(com - 1) == '\t' || *(com - 1) == '\0')
+		{
+			*com = '\0';
+		}
+	}
 }
 
 /**
