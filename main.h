@@ -12,7 +12,6 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <stdbool.h>
-#include <fcntl.h>
 
 extern char **environ;
 int read_buff(FILE *stream, char *buffer, ssize_t *bytes_read);
@@ -31,7 +30,7 @@ char *_strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
 char *_strdup(const char *string);
 int _strcmp(const char *s1, const char *s2);
-void execute_commands_file(const char *filename);
+/*void env(void);*/
 char *construct_filepath(char *directory, char *command);
 char *search_file_path(char *command);
 ssize_t _getline(char **lineptr, size_t *n, FILE *s);
@@ -49,5 +48,5 @@ void execute_commands(char *line);
 void execute_logical_operators(char *line);
 void logical(char *line);
 void ignore_comments(char *line);
-char *get_line(void);
+
 #endif
