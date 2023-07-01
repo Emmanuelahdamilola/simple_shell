@@ -62,6 +62,9 @@ int main(int argc, char **argv)
 		location(command, argv);
 		return (0);
 	}
+
 	read_execute_loop();
+	get_line();
+	execute_commands_file();
 	return (0);
 }
