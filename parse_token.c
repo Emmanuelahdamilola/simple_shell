@@ -14,10 +14,10 @@ void ignore_comments(char *line)
 }
 
 /**
- * parse_arguments - Tokenize(split) the input line and execute the command
+ * filter_parse_arguments - Tokenize the input line and execute the command
  * @line: The input line to be parsed
  */
-void parse_arguments(char *line)
+void filter_parse_arguments(char *line)
 {
 	char *token, **argv, *lineptr_copy = NULL;
 	const char *delim = " \n";
@@ -58,4 +58,32 @@ void parse_arguments(char *line)
 	_execute(argv);
 	free_argv(argv, i);
 	free(lineptr_copy);
+}
+
+/**
+ * parse_arguments - Tokenize(split) the input line and execute the command
+ * @line: The input line to be parsed
+ */
+
+void parse_arguments(char *line)
+{
+	char *token;
+
+	if (line == NULL)
+		return;
+
+	if (_strchr(line, ';') != NULL)
+	{
+		token = strtok(line, ";");
+		while (token != NULL)
+		{
+			filter_parse_arguments(token);
+			token = strtok(NULL, ";");
+		}
+	}
+	else
+	{
+		filter_parse_arguments(line);
+	}
+	/*return;*/
 }

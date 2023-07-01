@@ -44,5 +44,9 @@ char *setenvCommand(char **argv);
 char *unsetenvCommand(char **argv);
 void _setenv(char *args[]);
 void _unsetenv(char *args[]);
+void execute_commands(char *line);
+void execute_logical_operators(char *line);
+void logical(char *line);
+void ignore_comments(char *line);
 
 #endif
