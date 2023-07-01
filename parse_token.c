@@ -5,59 +5,13 @@
  * @line: command passed
  * Return: void
  */
-
 void ignore_comments(char *line)
 {
-    char *comment_pos = strchr(line, '#');
-
-    if (comment_pos != NULL)
-    {
-        if (comment_pos == line && (*(comment_pos - 1) == ' ' || *(comment_pos - 1) == '\t'))
-        {
-            *comment_pos = '\0';
-        }
-        else if (*(comment_pos - 1) == ' ' || *(comment_pos - 1) == '\t' || *(comment_pos - 1) == '\0')
-        {
-            *comment_pos = '\0';
-        }
-    }
-}
-
-
-/**
- * void ignore_comments(char *line)
-{
 	char *comment_pos = _strchr(line, '#');
-	
-	if (comment_pos != NULL)
-	{
-		if (comment_pos == line && *(comment_pos - 1) == ' ')
-			*comment_pos = '\0';
-		else if (comment_pos == line && *comment_pos == '\0' && *(comment_pos - 1) == ' ')
-			*comment_pos = '\0';
-	}
-}*/
-
-/**
- * void ignore_comments(char *line)
-{
-	char *comment_pos = strchr(line, '#');
-	char *non_whitespace_pos;
 
 	if (comment_pos != NULL)
-	{
-		non_whitespace_pos = line;
-		while (*non_whitespace_pos == ' ' || *non_whitespace_pos == '\t')
-		{
-			non_whitespace_pos++;
-		}
-		if (non_whitespace_pos == comment_pos)
-		{
-			*comment_pos = '\0';
-		}
-	}
+		*comment_pos = '\0';
 }
-*/
 
 /**
  * filter_parse_arguments - Tokenize the input line and execute the command
