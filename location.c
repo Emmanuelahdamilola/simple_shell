@@ -8,7 +8,8 @@
 char *location(char *command, char **argv)
 {
 	struct stat buffer;
-	char *file_path, **envptr;
+	char *file_path;
+	char **envptr;
 	int status = 0;
 
 	if (stat(command, &buffer) == 0)
@@ -24,8 +25,6 @@ char *location(char *command, char **argv)
 		}
 		exit(status);
 	}
-	else if (_strcmp(command, "exit") == 0 && argv[1] == NULL)
-		exit(status);
 	if (_strcmp(command, "env") == 0)
 	{
 		envptr = environ;
@@ -36,6 +35,8 @@ char *location(char *command, char **argv)
 			envptr++;
 		}
 	}
+	else if (_strcmp(command, "exit") == 0 && argv[1] == NULL)
+		exit(status);
 	if (_strcmp(command, "setenv") == 0)
 		return (setenvCommand(argv));
 	if (_strcmp(command, "unsetenv") == 0)
